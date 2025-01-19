@@ -4,7 +4,7 @@ A snowday app thats actually accurate
 
 
 ## Features
-###- **Snowday Predictions**:
+### - **Snowday Predictions**:
 Get the snowday predictions based on the latest snow forecasts and weather conditions.
 - **Future Snowdays**: 
 Many snowday apps only show the predictions for the next 1 or 2 days, this snowday app shows the predictions for the next 5 days.
