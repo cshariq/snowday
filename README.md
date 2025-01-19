@@ -31,3 +31,5 @@ Too lazy to type in your location all the time? Snowday app will always check fo
 All other snowday websites are just bombarded with ads. My snowday app provides a sleek UI without ads.
 ### - **Accessibility**:
 Available on any device anywhere, dark mode because its just better, and hosted with a easy to remember URL so you don't have to go looking for this website.
+### - **This app won't be given up on!!**:
+Using google's API's we collect user demographic to see where our targetted audience resides in, for areas where there's a majority of the audience more research might be done to better tailor the algorithm to that area. Rigth now its optimized for areas residing in the states/provinces Ontario and Quebec in Canada. The algorithm is robust enough that it will still be 90% accurate for all other areas!
