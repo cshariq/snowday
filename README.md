@@ -1,5 +1,5 @@
 # snowday
-Finally a snowday app that doesn't suck. Access it at: snowday.tech
+Finally a snowday app that doesn't suck. Access it at: <snowday.tech>
 <img width="1728" alt="image" src="https://github.com/user-attachments/assets/3db0d8d5-1523-4cb3-a905-6993c2e136af" />
 
 ## Features
