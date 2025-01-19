@@ -1,0 +1,132 @@
+.staticBar {
+    display: flex;
+    height: 50px;
+    border-radius: 100px;
+    margin: 10px;
+    margin-top: 0px;
+    align-items: center;
+    background: linear-gradient(to right, #DED6FF, #D0EBFF);
+    color: black;
+}
+
+h1 {
+    margin: 10px;
+}
+.staticBar {
+    --light: #b8b9bb;
+    --dark: #28292c;
+  }
+
+.menus:hover {
+    // padding: 50px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.menus {
+    color: black;
+    text-decoration: none;
+}
+
+.barItems {
+    // display: flex;
+    // justify-content: flex-end;
+    // align-items: flex-end;
+    margin: 20px;
+    margin-bottom: 18px;
+    // font-style: italic;
+    // left: 428px;
+    // top: 36px;
+    // position: fixed;
+    // overflow: visible;
+    // width: 72px;
+    // white-space: nowrap;
+    // text-align: left;
+    // font-family: Roboto;
+    // font-style: normal;
+    // font-weight: lighter;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.barItems:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    scale: 102%;
+    // font-weight: bold;
+} 
+
+#barIcon {
+    margin-left: 20px;
+    scale: 120%;
+}
+#barIcon:hover {
+    margin-left: 20px;
+    scale: 130%;
+}
+
+.userStatus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    text-decoration: none;
+    right: 120px;
+    padding: 3px;
+    padding-right: 15px;
+    background-color: black;
+    color:white;
+    border-radius: 100px;
+    cursor: pointer;
+  }
+  
+#login:hover {
+    text-decoration: underline;
+}
+
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    // margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #333; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+    border-radius:100px ;
+    transition: background-color 0.5s;
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }

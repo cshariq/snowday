@@ -1,0 +1,43 @@
+#camera {
+    background-color: $payment-checkout-container-color;
+    transition: background-color 0.5s;
+    flex: 1 1 20%;
+    // height: 100%;
+}
+
+#camera.light-mode {
+    background-color: #c5c5c5;
+    color: black;
+}
+
+#camera.dark-mode {
+    background-color: $payment-checkout-container-color;
+    color: #f4f4f4;
+}
+
+.recent-text{
+    // position: relative;
+    font-family: "Open Sans", sans-serif;
+    font-size: 30px;
+    padding: 5px;
+    margin-left: 15px;
+    color: rgb(0, 0, 0);
+}
+
+.right-container {
+    float: right; 
+    display: block;
+}
+
+#settings {
+    font-size: 90%;
+    color: white;
+}
+
+.black-box {
+    flex-grow: 1;
+    max-height: 93%;
+    max-width: 100%;
+    background-color: black;
+    border-radius: 20px;
+}

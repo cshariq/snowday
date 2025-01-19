@@ -1,0 +1,230 @@
+$background-color: #ffffff;
+$background-color-dark: #ffffff;
+
+$payment-container-color: #ecf4fe;
+$text-color: rgb(0, 0, 0);
+$static-bar-color: blue;
+$payment-checkout-container-color:#e0efff;
+@mixin mq($size) {
+    @media only screen and (min-width: $size) {
+        @content;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.weather-info{
+    color: black;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.5s;
+}
+
+.table-elements{
+    border-radius: 50px;
+    padding: 50px;
+}
+.column-elements{
+    border-radius: 100px;
+    height: 30px; /* Fixed height for rows */ 
+    vertical-align: middle; /* Center-align content vertically */
+}
+table, th, td {
+    border-collapse: collapse;
+    table-layout: fixed;
+    // overflow: hidden;
+    // display: grid;
+    padding: 10px;
+    overflow-x: auto;
+}
+th, td {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+th:first-child, td:first-child {
+    border-left: none;
+}
+th:last-child, td:last-child {
+    border-right: none;
+}
+
+// .column-elements:hover {
+//     background-color: #a0b2c5;
+// }
+
+option:hover {
+    background-color: #c0cfe0;
+    transition: background-color 0.5s;
+}
+
+option:active {
+    background-color: #b5cde6;
+    transition: background-color 0.5s;
+    color: black;
+}
+
+option:checked {
+    box-shadow: 0 0 10px 100px #b5cde6 inset;
+    transition: background-color 0.5s;
+    color: black;
+}
+
+option {
+    color: black;
+    border-radius: 50px;
+    padding: 10px;
+    margin:5px;
+    margin-left: 0px;
+}
+
+option:focus {
+    background-color: #b5cde6;
+    transition: background-color 0.5s;
+    color: black;
+}
+
+html, body {
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background-color: $background-color;
+    transition: background-color 0.5s;
+    // height: 100%;
+}
+.paymentContainer {
+    background-color: #ecf4fe;
+    transition: background-color 0.5s;
+}
+
+#sessions {
+    background-color: #e0efff;
+    transition: background-color 0.5s;
+}
+
+.dark-modes {
+    body{
+        background-color: black;
+        color: white;
+    }
+    .sectionContainer {
+        background-color: #1c252d;
+        color: white;
+    }
+    .paymentContainer {
+        background-color: #1c252d;
+    }
+
+    .table-holder {
+        background-color: #181e24;
+        color: white;
+    }
+    .weather-info {
+        color: white;
+    }
+    .container {
+        background-color: rgb(92, 111, 128);
+    }
+    #sessions {
+        background-color: #2e363e;
+        color: white;
+    }
+    #camera {
+        background-color: #2e363e;
+    }
+    .percentage-text {
+        color: #ecf4fe;
+    }
+    option {
+        color: rgb(233, 233, 233);
+    }
+    option:focus {
+        background-color: #676e85;
+        color: rgb(255, 255, 255);
+    }
+    option:hover {
+        background-color: #575f68;
+    }
+    
+    option:active {
+        background-color: #676e85;
+        color: rgb(255, 255, 255);
+    }
+    
+    option:checked {
+        box-shadow: 0 0 10px 1000px #676e85 inset;
+        color: rgb(255, 255, 255);
+    }
+    .recent-text {
+        color: white;
+    }
+    .container-2 {
+        background-color: #31373d;
+    }
+    #snackbar{
+        background-color: #e0efff;
+        color: black;
+    }
+    background-color: black;
+}
+
+
+.paymentMethods {
+    display: inline;
+    padding: 10px;
+    width: 90px;
+}
+
+section {
+    margin: 14px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    @include mq(1300px) {
+        display:flex;
+        // margin-left: 5%;
+        // margin-right: 5%;
+    }
+    // @include mq(1080px) {
+    //     margin-left: 8%;
+    //     margin-right: 8%;
+    // }  
+}
+
+@media (max-width: 1000px) {
+    th, td {
+        font-size: 14px;
+        padding: 5px;
+        width: 200px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
+@media (max-width: 1000px) {
+    th, td {
+        font-size: 14px;
+        padding: 5px;
+        width: 200px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+    
+    .sectionContainer {
+        @include mq(1000px) {
+            height: 100%;
+            // margin-left: 5%;
+            // margin-right: 5%;
+          }
+    }
+}
