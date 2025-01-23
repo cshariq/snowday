@@ -63,6 +63,7 @@ function calculateSnowDayChance(data) {
   const forecastDay = data.fcstdaily10short.forecasts[1];
 
   if (!forecastDay.metric.snow_qpf === 0) {
+    console.log(forecastDay.metric.snow_qpf)
     chance += 15 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
 
     if (forecastDay.metric.max_temp <= 3) {
