@@ -41,12 +41,10 @@ function fetchWeather(url) {
     .catch((error) => console.error('Error fetching weather data:', error));
 }
 
-// Function to calculate snow day chance
-
-// Function to process and display weather data
 function processWeatherData(data) {
   console.log("Processing data")
-  function hoursUntil4AM() {
+  function calculateSnowDayChance(data) {
+    function hoursUntil4AM() {
       const now = new Date();
       const target = new Date(now);
       target.setHours(4, 0, 0, 0); // Set target time to 4 AM
@@ -67,7 +65,9 @@ function processWeatherData(data) {
     console.log(forecastDay.metric.snow_qpf)
     console.log(forecastDay)
     if (!forecastDay.metric.snow_qpf === 0) {
+      
       chance += 15 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
+  
       if (forecastDay.metric.max_temp <= 3) {
         chance += 5;
       }
