@@ -55,7 +55,7 @@ function processWeatherData(data) {
       }
   
       const diff = target - now; // Difference in milliseconds
-      const hours = diff / (1000 * 60 * 60); // Convert milliseconds to hours
+      const hours = Math.round(diff / (1000 * 60 * 60)); // Convert milliseconds to hours
       console.log(hours)
       return hours;
     }
