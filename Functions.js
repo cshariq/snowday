@@ -42,72 +42,72 @@ function fetchWeather(url) {
 }
 
 // Function to calculate snow day chance
-function calculateSnowDayChance(data) {
-  function timeRemaining(currentHour, currentMinute, targetHour) {
-    const currentTotalMinutes = currentHour * 60 + currentMinute;
-    const targetTotalMinutes = targetHour * 60;
-    let remainingMinutes = targetTotalMinutes - currentTotalMinutes;
-
-    if (remainingMinutes < 0) {
-      remainingMinutes += 24 * 60; // Add 24 hours worth of minutes
-    }
-
-    return Math.round(remainingMinutes / 60);
-  }
-
-  const currentHour = 0; // Example: 00:18
-  const currentMinute = 18;
-  const targetHour = 4; // Target time: 4am
-  const timeLeft = timeRemaining(currentHour, currentMinute, targetHour);
-  let chance = 0;
-  const forecastDay = data.fcstdaily10short.forecasts[1];
-  console.log(forecastDay.metric.snow_qpf)
-  console.log(forecastDay)
-  if (!forecastDay.metric.snow_qpf === 0) {
-    
-    chance += 15 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
-
-    if (forecastDay.metric.max_temp <= 3) {
-      chance += 5;
-    }
-
-    chance += 5 * Math.min(forecastDay.day.metric.wspd / 16, 1);
-
-    if (forecastDay.day.precip_type === 'snow' || forecastDay.day.precip_type === 'freezing rain') {
-      chance += 10;
-    }  else {
-      chance -= 10;
-    }
-
-    const forecast = data.fcsthourly24short.forecasts[timeLeft];
-    chance += 20 * Math.min(forecast.pop / 100, 1)
-    chance += 15 * Math.min(forecast.metric.snow_qpf / 2.5, 1);
-    chance += 10 * Math.min(forecast.clds / 100, 1);
-    if (forecast.metric.temp <= 2) {
-      chance += 5;
-    }
-
-    chance += 5 * Math.min(forecast.metric.wspd / 16, 1);
-
-    if (forecast.precip_type === 'snow' || forecast.precip_type === 'freezing rain') {
-      chance += 5;
-    }  else {
-      chance -= 15;
-    }
-  }
-  if (!chance >= 85) {
-    var inputValue = document.getElementById('integerInput').value; 
-    if (!inputValue === '') { 
-      chance -= inputValue*2
-    }
-  }
-  chance = Math.max(chance, 0)
-  return Math.round(chance);
-}
 
 // Function to process and display weather data
 function processWeatherData(data) {
   console.log("Processing data")
+  function calculateSnowDayChance(data) {
+    function timeRemaining(currentHour, currentMinute, targetHour) {
+      const currentTotalMinutes = currentHour * 60 + currentMinute;
+      const targetTotalMinutes = targetHour * 60;
+      let remainingMinutes = targetTotalMinutes - currentTotalMinutes;
+  
+      if (remainingMinutes < 0) {
+        remainingMinutes += 24 * 60; // Add 24 hours worth of minutes
+      }
+  
+      return Math.round(remainingMinutes / 60);
+    }
+  
+    const currentHour = 0; // Example: 00:18
+    const currentMinute = 18;
+    const targetHour = 4; // Target time: 4am
+    const timeLeft = timeRemaining(currentHour, currentMinute, targetHour);
+    let chance = 0;
+    const forecastDay = data.fcstdaily10short.forecasts[1];
+    console.log(forecastDay.metric.snow_qpf)
+    console.log(forecastDay)
+    if (!forecastDay.metric.snow_qpf === 0) {
+      
+      chance += 15 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
+  
+      if (forecastDay.metric.max_temp <= 3) {
+        chance += 5;
+      }
+  
+      chance += 5 * Math.min(forecastDay.day.metric.wspd / 16, 1);
+  
+      if (forecastDay.day.precip_type === 'snow' || forecastDay.day.precip_type === 'freezing rain') {
+        chance += 10;
+      }  else {
+        chance -= 10;
+      }
+  
+      const forecast = data.fcsthourly24short.forecasts[timeLeft];
+      chance += 20 * Math.min(forecast.pop / 100, 1)
+      chance += 15 * Math.min(forecast.metric.snow_qpf / 2.5, 1);
+      chance += 10 * Math.min(forecast.clds / 100, 1);
+      if (forecast.metric.temp <= 2) {
+        chance += 5;
+      }
+  
+      chance += 5 * Math.min(forecast.metric.wspd / 16, 1);
+  
+      if (forecast.precip_type === 'snow' || forecast.precip_type === 'freezing rain') {
+        chance += 5;
+      }  else {
+        chance -= 15;
+      }
+    }
+    if (!chance >= 85) {
+      var inputValue = document.getElementById('integerInput').value; 
+      if (!inputValue === '') { 
+        chance -= inputValue*2
+      }
+    }
+    chance = Math.max(chance, 0)
+    return Math.round(chance);
+  }
   let snowDayChance = calculateSnowDayChance(data);
   document.getElementById('percentage-text').innerHTML = `<strong>${snowDayChance}%</strong>`;
 
