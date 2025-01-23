@@ -127,7 +127,7 @@ function processWeatherData(data) {
     const forecastDay = forecast[index + 1];
     let chance = 0;
 
-    if (forecastDay.day.pop >= 60) {
+    if (forecastDay.day.pop >= 50) {
       chance += 35 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
       chance += 35 * Math.min(forecastDay.day.pop / 100, 1);
 
