@@ -46,31 +46,28 @@ function fetchWeather(url) {
 // Function to process and display weather data
 function processWeatherData(data) {
   console.log("Processing data")
-  function calculateSnowDayChance(data) {
-    function timeRemaining(currentHour, currentMinute, targetHour) {
-      const currentTotalMinutes = currentHour * 60 + currentMinute;
-      const targetTotalMinutes = targetHour * 60;
-      let remainingMinutes = targetTotalMinutes - currentTotalMinutes;
+  function hoursUntil4AM() {
+      const now = new Date();
+      const target = new Date(now);
+      target.setHours(4, 0, 0, 0); // Set target time to 4 AM
   
-      if (remainingMinutes < 0) {
-        remainingMinutes += 24 * 60; // Add 24 hours worth of minutes
+      // If the target time has already passed today, set it to 4 AM the next day
+      if (now >= target) {
+          target.setDate(target.getDate() + 1);
       }
   
-      return Math.round(remainingMinutes / 60);
+      const diff = target - now; // Difference in milliseconds
+      const hours = diff / (1000 * 60 * 60); // Convert milliseconds to hours
+      console.log(hours)
+      return hours;
     }
-  
-    const currentHour = 0; // Example: 00:18
-    const currentMinute = 18;
-    const targetHour = 4; // Target time: 4am
-    const timeLeft = timeRemaining(currentHour, currentMinute, targetHour);
+    const timeLeft = hoursUntil4AM();
     let chance = 0;
     const forecastDay = data.fcstdaily10short.forecasts[1];
     console.log(forecastDay.metric.snow_qpf)
     console.log(forecastDay)
     if (!forecastDay.metric.snow_qpf === 0) {
-      
       chance += 15 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
-  
       if (forecastDay.metric.max_temp <= 3) {
         chance += 5;
       }
@@ -84,6 +81,7 @@ function processWeatherData(data) {
       }
   
       const forecast = data.fcsthourly24short.forecasts[timeLeft];
+      console.log(forecast)
       chance += 20 * Math.min(forecast.pop / 100, 1)
       chance += 15 * Math.min(forecast.metric.snow_qpf / 2.5, 1);
       chance += 10 * Math.min(forecast.clds / 100, 1);
