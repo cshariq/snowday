@@ -84,11 +84,11 @@ function processWeatherData(data) {
       const forecast = data.fcsthourly24short.forecasts[timeLeft];
       console.log(forecast)
       chance += 20 * Math.min(forecast.pop / 100, 1)
-      console.log("pop at 4am added" + (20 * Math.min(forecast.pop / 100, 1)) +" points")
-      chance += 15 * Math.min(forecast.metric.snow_qpf / 2.5, 1);
-      console.log("snow at 4am added" + (15 * Math.min(forecast.metric.snow_qpf / 2.5, 1)) +" points")
+      console.log("pop at 4am added " + (20 * Math.min(forecast.pop / 100, 1)) +" points out of 20")
+      chance += 15 * Math.min(forecast.metric.snow_qpf / 2, 1);
+      console.log("snow at 4am added " + (15 * Math.min(forecast.metric.snow_qpf / 2.5, 1)) +" points out of 15")
       chance += 10 * Math.min(forecast.clds / 100, 1);
-      console.log("clouds at 4am added" + (10 * Math.min(forecast.clds / 100, 1)) +" points")
+      console.log("clouds at 4am added " + (10 * Math.min(forecast.clds / 100, 1)) +" points out of 10")
       if (forecast.metric.temp <= 2) {
         chance += 5;
         console.log("low temp at 4am added 5 points")
