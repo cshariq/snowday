@@ -56,37 +56,44 @@ function processWeatherData(data) {
   
       const diff = target - now; // Difference in milliseconds
       const hours = Math.round(diff / (1000 * 60 * 60)); // Convert milliseconds to hours
-      console.log(hours)
       return hours;
     }
     const timeLeft = hoursUntil4AM();
     let chance = 0;
     const forecastDay = data.fcstdaily10short.forecasts[1];
-    console.log(forecastDay.metric.snow_qpf)
-    console.log(forecastDay)
     if (forecastDay.metric.snow_qpf !== 0) {
-      
       chance += 15 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
-  
+      console.log(forecastDay.metric.snow_qpf + "cm of snow added " + chance + " points")
       if (forecastDay.metric.max_temp <= 3) {
         chance += 5;
+        console.log(forecastDay.metric.max_temp + "º, low temp added 5 points")
+      } else {
+        console.log(forecastDay.metric.max_temp + "º, high temp DID NOT add 5 points")
       }
   
       chance += 5 * Math.min(forecastDay.day.metric.wspd / 16, 1);
   
       if (forecastDay.day.precip_type === 'snow' || forecastDay.day.precip_type === 'freezing rain') {
         chance += 10;
+        console.log("snow/freezing rain added 5 points")
       }  else {
         chance -= 10;
+        console.log("snow/freezing rain removed 10 points")
       }
   
       const forecast = data.fcsthourly24short.forecasts[timeLeft];
       console.log(forecast)
       chance += 20 * Math.min(forecast.pop / 100, 1)
+      console.log("pop at 4am added" + (20 * Math.min(forecast.pop / 100, 1)) +" points")
       chance += 15 * Math.min(forecast.metric.snow_qpf / 2.5, 1);
+      console.log("snow at 4am added" + (15 * Math.min(forecast.metric.snow_qpf / 2.5, 1)) +" points")
       chance += 10 * Math.min(forecast.clds / 100, 1);
+      console.log("clouds at 4am added" + (10 * Math.min(forecast.clds / 100, 1)) +" points")
       if (forecast.metric.temp <= 2) {
         chance += 5;
+        console.log("low temp at 4am added 5 points")
+      } else {
+        console.log("high temp at 4am DID NOT add 5 points")
       }
   
       chance += 5 * Math.min(forecast.metric.wspd / 16, 1);
@@ -95,6 +102,7 @@ function processWeatherData(data) {
         chance += 5;
       }  else {
         chance -= 15;
+        console.log("no snow or freezing rain at 4am removed 15 points")
       }
     }
     if (!chance >= 85) {
