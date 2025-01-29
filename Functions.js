@@ -168,6 +168,7 @@ function processWeatherData(data) {
     document.getElementById(`progress-bar-${index + 1}`).style.setProperty('--meter-value', chance);
 
     createAndAppendElement('dow', 'th', forecastDay.day.daypart_name);
+    createAndAppendElement('snow', 'td', `Snow<br><strong>${forecastDay.day.metric.snow_qpf} cm</strong>`);
     createAndAppendElement('perciptattion-chance', 'td', `Chance of Precipitation<br><strong>${forecastDay.day.pop}%</strong>`);
     createAndAppendElement('perciptattion', 'td', `Precipitation Type<br><strong>${forecastDay.day.precip_type}</strong>`);
     createAndAppendElement('wind', 'td', `Wind<br><strong>${forecastDay.day.metric.wspd} km/h</strong>`);
