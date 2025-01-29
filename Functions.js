@@ -82,7 +82,6 @@ function processWeatherData(data) {
       }
   
       const forecast = data.fcsthourly24short.forecasts[timeLeft];
-      console.log(forecast)
       chance += 20 * Math.min(forecast.pop / 100, 1)
       console.log("pop at 4am added " + (20 * Math.min(forecast.pop / 100, 1)) +" points out of 20")
       chance += 15 * Math.min(forecast.metric.snow_qpf / 2, 1);
