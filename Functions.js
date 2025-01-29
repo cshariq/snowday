@@ -64,7 +64,7 @@ function processWeatherData(data) {
     const forecastDay = data.fcstdaily10short.forecasts[1];
     console.log(forecastDay.metric.snow_qpf)
     console.log(forecastDay)
-    if (!forecastDay.metric.snow_qpf === 0) {
+    if (forecastDay.metric.snow_qpf !== 0) {
       
       chance += 15 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
   
