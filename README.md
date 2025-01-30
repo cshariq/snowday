@@ -27,8 +27,6 @@ The algorithm that provides the % chance of a snowday is perfectly tuned. You wo
 Often times school board will consider the times a snowday has already occured. To account for this users can enter how many snowdays have already happened. The website will then recalculate the snowday prediction based on this information.
 ### - **Auto Location**:
 Too lazy to type in your location all the time? Snowday app will always check for your current location once location permissions have given. Snowday predictions will be given for the location fetched.
-### - **NO ADS**:
-All other snowday websites are just bombarded with ads. My snowday app provides a sleek UI without ads.
 ### - **Accessibility**:
 Available on any device anywhere, dark mode because its just better, and hosted with a easy to remember URL so you don't have to go looking for this website.
 ### - **This app won't be given up on!!**:
