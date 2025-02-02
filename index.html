@@ -28,7 +28,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel= "stylesheet" href= "dist/css/style.css">
-        <script src="https://trusted.example.com/path/jsonp?callback=alert(document.domain)//"></script>
     </head>
 <body>
     <main>
@@ -37,14 +36,14 @@
 
                 <span class="recent-text">Locations</span>
                 <select size="2" id="sessions" onchange="switchSession()" style="font-family: 'Montserrat', sans-serif; padding: 15px;border-radius: 10px; outline: none; border: none; border-width: 0; max-width: 100%; height: 90%; display: block; width: 100%; color: black;">
-                    <option selected="selected" value="0">Automatic</option>
-                    <option value="1">Ottawa</option>
-                    <option value="2">Montreal</option>
-                    <option value="3">Toronto</option>
-                    <option value="4">New York</option>
-                    <option value="5">Boston</option>
-                    <option value="6">San Francisco</option>
-                    <option value="7">Los Angeles</option>
+                    <option aria-label="Automatic" selected="selected" value="0">Automatic</option>
+                    <option aria-label="Ottawa" value="1">Ottawa</option>
+                    <option aria-label="Montreal" value="2">Montreal</option>
+                    <option aria-label="Toronto" value="3">Toronto</option>
+                    <option aria-label="New York" value="4">New York</option>
+                    <option aria-label="Boston" value="5">Boston</option>
+                    <option aria-label="San Francisco" value="6">San Francisco</option>
+                    <option aria-label="Los Angeles" value="7">Los Angeles</option>
                 </select>
                 <div class ='toggle-switch' onclick="myFunction()">
                     <label class="label-1" onclick="myFunction()">
