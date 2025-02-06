@@ -119,7 +119,7 @@ function processWeatherData(data) {
     chance = Math.max(chance, 0)
     return Math.round(chance);
   }
-  snowDayChance = calculateSnowDayChance(data);
+  let snowDayChance = calculateSnowDayChance(data);
   document.getElementById('percentage-text').innerHTML = `<strong>${snowDayChance}%</strong>`;
 
   if (snowDayChance === 0) {
@@ -141,7 +141,7 @@ function processWeatherData(data) {
     // }
     // else {
       const forecastDay = forecast[index + 1];
-      chance = 0;
+      let chance = 0;
   
       if (forecastDay.day.pop >= 50) {
         chance += 35 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
