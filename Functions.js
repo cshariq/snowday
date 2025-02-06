@@ -136,8 +136,8 @@ function processWeatherData(data) {
     if (!forecast[index]) {
       console.warn(`No data for ${day}`);
       return;
-    }
-    if index == 0 {
+    } 
+    else if (index == 0) {
       chance = snowDayChance
     }
     else {
