@@ -137,37 +137,40 @@ function processWeatherData(data) {
       console.warn(`No data for ${day}`);
       return;
     }
-    
-    const forecastDay = forecast[index + 1];
-    let chance = 0;
-
-    if (forecastDay.day.pop >= 50) {
-      chance += 35 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
-      chance += 35 * Math.min(forecastDay.day.pop / 100, 1);
-
-      if (forecastDay.metric.max_temp <= 3) {
-        chance += 10;
-      }
-
-      chance += 10 * Math.min(forecastDay.day.metric.wspd / 16, 1);
-
-      if (forecastDay.day.precip_type === 'snow' || forecastDay.day.precip_type === 'freezing rain') {
-        chance += 10;
-      } else {
-        chance -= 10;
-      }
-      if (!chance >= 85) {
-        var inputValue = document.getElementById('integerInput').value; 
-        if (!inputValue === '') { 
-          chance -= inputValue*2
-        }
-      }
-      chance = Math.max(chance, 0)
-      chance = Math.round(chance);
+    if index == 0 {
+      chance = snowDayChance
     }
-
-    document.getElementById(`chance-element-${index + 1}`).innerText = `${chance}%`;
-
+    else {
+      const forecastDay = forecast[index + 1];
+      let chance = 0;
+  
+      if (forecastDay.day.pop >= 50) {
+        chance += 35 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
+        chance += 35 * Math.min(forecastDay.day.pop / 100, 1);
+  
+        if (forecastDay.metric.max_temp <= 3) {
+          chance += 10;
+        }
+  
+        chance += 10 * Math.min(forecastDay.day.metric.wspd / 16, 1);
+  
+        if (forecastDay.day.precip_type === 'snow' || forecastDay.day.precip_type === 'freezing rain') {
+          chance += 10;
+        } else {
+          chance -= 10;
+        }
+        if (!chance >= 85) {
+          var inputValue = document.getElementById('integerInput').value; 
+          if (!inputValue === '') { 
+            chance -= inputValue*2
+          }
+        }
+        chance = Math.max(chance, 0)
+        chance = Math.round(chance);
+      }
+  
+      document.getElementById(`chance-element-${index + 1}`).innerText = `${chance}%`;
+    }
     if (chance === 0) {
       chance = 1;
     }
