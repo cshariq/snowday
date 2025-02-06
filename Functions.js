@@ -1,4 +1,3 @@
-// Function to fetch weather data based on user's location
 function fetchWeatherData() {
   navigator.geolocation.getCurrentPosition(
     (position) => {
@@ -20,8 +19,6 @@ function fetchWeatherData() {
     }, {enableHighAccuracy: true, timeout: 5000}
   );
 }
-
-// Function to fetch weather data from the API
 function fetchWeather(url) {
   fetch(url)
     .then((response) => {
@@ -43,7 +40,8 @@ function fetchWeather(url) {
 
 function processWeatherData(data) {
   console.log("Processing data")
-  let snowDayChance = 0
+  // let snowDayChance = 0;
+  // let chance = 0;
   clearElements('dow'); 
   clearElements('snow');
   clearElements('perciptattion-chance'); 
@@ -55,19 +53,16 @@ function processWeatherData(data) {
     function hoursUntil4AM() {
       const now = new Date();
       const target = new Date(now);
-      target.setHours(4, 0, 0, 0); // Set target time to 4 AM
-  
-      // If the target time has already passed today, set it to 4 AM the next day
+      target.setHours(4, 0, 0, 0);
       if (now >= target) {
           target.setDate(target.getDate() + 1);
       }
-  
-      const diff = target - now; // Difference in milliseconds
-      const hours = Math.round(diff / (1000 * 60 * 60)); // Convert milliseconds to hours
+      const diff = target - now;
+      const hours = Math.round(diff / (1000 * 60 * 60));
       return hours;
     }
     const timeLeft = hoursUntil4AM();
-    let chance = 0;
+    chance = 0;
     const forecastDay = data.fcstdaily10short.forecasts[1];
     if (forecastDay.metric.snow_qpf !== 0) {
       chance += 15 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
@@ -144,7 +139,7 @@ function processWeatherData(data) {
     }
     else {
       const forecastDay = forecast[index + 1];
-      let chance = 0;
+      chance = 0;
   
       if (forecastDay.day.pop >= 50) {
         chance += 35 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
@@ -172,7 +167,6 @@ function processWeatherData(data) {
       }
   
       document.getElementById(`chance-element-${index + 1}`).innerText = `${chance}%`;
-      return chance
     }
     if (chance === 0) {
       chance = 1;
@@ -227,7 +221,6 @@ async function switchSession() {
   clearElements('uv-index');
   const selectedValue = document.getElementById('sessions').value;
   if (selectedValue === '0') {
-    // Use browser's location
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const latitude = position.coords.latitude;
