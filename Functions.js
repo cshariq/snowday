@@ -136,10 +136,10 @@ function processWeatherData(data) {
       console.warn(`No data for ${day}`);
       return;
     }
-    else if (index == 0) {
-      chance = snowDayChance
-    }
-    else {
+    // else if (index == 0) {
+    //   chance = snowDayChance
+    // }
+    // else {
       const forecastDay = forecast[index + 1];
       chance = 0;
   
@@ -166,14 +166,14 @@ function processWeatherData(data) {
         }
         chance = Math.max(chance, 0)
         chance = Math.round(chance);
-      }
+      // }
   
       document.getElementById(`chance-element-${index + 1}`).innerText = `${chance}%`;
     }
     if (chance === 0) {
       chance = 1;
     }
-    const forecastDay = forecast[index + 1];
+    // const forecastDay = forecast[index + 1];
     document.getElementById(`progress-bar-${index + 1}`).style.setProperty('--meter-value', chance);
     createAndAppendElement('dow', 'th', forecastDay.day.daypart_name);
     createAndAppendElement('snow', 'td', `Snow Forecasted<br><strong>${forecastDay.day.metric.snow_qpf} cm</strong>`);
