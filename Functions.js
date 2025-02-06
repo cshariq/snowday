@@ -43,6 +43,12 @@ function fetchWeather(url) {
 
 function processWeatherData(data) {
   console.log("Processing data")
+  clearElements('dow'); 
+  clearElements('perciptattion-chance'); 
+  clearElements('perciptattion'); clearElements('wind'); 
+  clearElements('temp'); 
+  clearElements('visibility'); 
+  clearElements('uv-index');
   function calculateSnowDayChance(data) {
     function hoursUntil4AM() {
       const now = new Date();
@@ -166,12 +172,6 @@ function processWeatherData(data) {
     }
 
     document.getElementById(`progress-bar-${index + 1}`).style.setProperty('--meter-value', chance);
-    clearElements('dow'); 
-    clearElements('perciptattion-chance'); 
-    clearElements('perciptattion'); clearElements('wind'); 
-    clearElements('temp'); 
-    clearElements('visibility'); 
-    clearElements('uv-index');
     createAndAppendElement('dow', 'th', forecastDay.day.daypart_name);
     createAndAppendElement('snow', 'td', `Snow Forecasted<br><strong>${forecastDay.day.metric.snow_qpf} cm</strong>`);
     createAndAppendElement('perciptattion-chance', 'td', `Chance of Precipitation<br><strong>${forecastDay.day.pop}%</strong>`);
