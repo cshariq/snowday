@@ -44,6 +44,7 @@ function fetchWeather(url) {
 function processWeatherData(data) {
   console.log("Processing data")
   clearElements('dow'); 
+  clearElements('snow');
   clearElements('perciptattion-chance'); 
   clearElements('perciptattion'); clearElements('wind'); 
   clearElements('temp'); 
@@ -212,6 +213,7 @@ function clearElements(parentId) {
 }
 async function switchSession() {
   clearElements('dow'); 
+  clearElements('snow');
   clearElements('perciptattion-chance'); 
   clearElements('perciptattion'); clearElements('wind'); 
   clearElements('temp'); 
