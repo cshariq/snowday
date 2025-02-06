@@ -136,10 +136,10 @@ function processWeatherData(data) {
     if (!forecast[index]) {
       console.warn(`No data for ${day}`);
       return;
-    } 
+    }
+    const forecastDay = forecast[index + 1];
     else if (index == 0) {
       chance = snowDayChance
-      const forecastDay = forecast[index + 1];
     }
     else {
       const forecastDay = forecast[index + 1];
@@ -221,7 +221,7 @@ async function switchSession() {
   clearElements('perciptattion-chance'); 
   clearElements('perciptattion'); clearElements('wind'); 
   clearElements('temp'); 
-  clearElements('visibility'); 
+  clearElements('visibility');
   clearElements('uv-index');
   const selectedValue = document.getElementById('sessions').value;
   if (selectedValue === '0') {
