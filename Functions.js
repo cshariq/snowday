@@ -43,6 +43,7 @@ function fetchWeather(url) {
 
 function processWeatherData(data) {
   console.log("Processing data")
+  let snowDayChance = 0
   clearElements('dow'); 
   clearElements('snow');
   clearElements('perciptattion-chance'); 
@@ -120,7 +121,7 @@ function processWeatherData(data) {
     chance = Math.max(chance, 0)
     return Math.round(chance);
   }
-  let snowDayChance = calculateSnowDayChance(data);
+  snowDayChance = calculateSnowDayChance(data);
   document.getElementById('percentage-text').innerHTML = `<strong>${snowDayChance}%</strong>`;
 
   if (snowDayChance === 0) {
@@ -139,6 +140,7 @@ function processWeatherData(data) {
     }
     else if (index == 0) {
       chance = snowDayChance
+      return chance
     }
     else {
       const forecastDay = forecast[index + 1];
@@ -170,6 +172,7 @@ function processWeatherData(data) {
       }
   
       document.getElementById(`chance-element-${index + 1}`).innerText = `${chance}%`;
+      return chance
     }
     if (chance === 0) {
       chance = 1;
