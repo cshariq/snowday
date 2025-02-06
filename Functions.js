@@ -137,7 +137,6 @@ function processWeatherData(data) {
       console.warn(`No data for ${day}`);
       return;
     }
-    const forecastDay = forecast[index + 1];
     else if (index == 0) {
       chance = snowDayChance
     }
@@ -175,7 +174,7 @@ function processWeatherData(data) {
     if (chance === 0) {
       chance = 1;
     }
-
+    const forecastDay = forecast[index + 1];
     document.getElementById(`progress-bar-${index + 1}`).style.setProperty('--meter-value', chance);
     createAndAppendElement('dow', 'th', forecastDay.day.daypart_name);
     createAndAppendElement('snow', 'td', `Snow Forecasted<br><strong>${forecastDay.day.metric.snow_qpf} cm</strong>`);
