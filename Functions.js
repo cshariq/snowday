@@ -139,6 +139,7 @@ function processWeatherData(data) {
     } 
     else if (index == 0) {
       chance = snowDayChance
+      const forecastDay = forecast[index + 1];
     }
     else {
       const forecastDay = forecast[index + 1];
