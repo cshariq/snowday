@@ -1,3 +1,4 @@
+// Function to fetch weather data based on user's location
 function fetchWeatherData() {
   navigator.geolocation.getCurrentPosition(
     (position) => {
@@ -19,6 +20,8 @@ function fetchWeatherData() {
     }, {enableHighAccuracy: true, timeout: 5000}
   );
 }
+
+// Function to fetch weather data from the API
 function fetchWeather(url) {
   fetch(url)
     .then((response) => {
@@ -135,7 +138,6 @@ function processWeatherData(data) {
     }
     else if (index == 0) {
       chance = snowDayChance
-      return chance
     }
     else {
       const forecastDay = forecast[index + 1];
