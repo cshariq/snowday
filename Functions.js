@@ -43,8 +43,6 @@ function fetchWeather(url) {
 
 function processWeatherData(data) {
   console.log("Processing data")
-  // let snowDayChance = 0;
-  // let chance = 0;
   clearElements('dow'); 
   clearElements('snow');
   clearElements('perciptattion-chance'); 
@@ -56,16 +54,19 @@ function processWeatherData(data) {
     function hoursUntil4AM() {
       const now = new Date();
       const target = new Date(now);
-      target.setHours(4, 0, 0, 0);
+      target.setHours(4, 0, 0, 0); // Set target time to 4 AM
+  
+      // If the target time has already passed today, set it to 4 AM the next day
       if (now >= target) {
           target.setDate(target.getDate() + 1);
       }
-      const diff = target - now;
-      const hours = Math.round(diff / (1000 * 60 * 60));
+  
+      const diff = target - now; // Difference in milliseconds
+      const hours = Math.round(diff / (1000 * 60 * 60)); // Convert milliseconds to hours
       return hours;
     }
     const timeLeft = hoursUntil4AM();
-    chance = 0;
+    let chance = 0;
     const forecastDay = data.fcstdaily10short.forecasts[1];
     if (forecastDay.metric.snow_qpf !== 0) {
       chance += 15 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
@@ -136,44 +137,41 @@ function processWeatherData(data) {
       console.warn(`No data for ${day}`);
       return;
     }
-    // else if (index == 0) {
-    //   chance = snowDayChance
-    // }
-    // else {
-      const forecastDay = forecast[index + 1];
-      let chance = 0;
-  
-      if (forecastDay.day.pop >= 50) {
-        chance += 35 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
-        chance += 35 * Math.min(forecastDay.day.pop / 100, 1);
-  
-        if (forecastDay.metric.max_temp <= 3) {
-          chance += 10;
+    
+    const forecastDay = forecast[index + 1];
+    let chance = 0;
+
+    if (forecastDay.day.pop >= 50) {
+      chance += 35 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
+      chance += 35 * Math.min(forecastDay.day.pop / 100, 1);
+
+      if (forecastDay.metric.max_temp <= 3) {
+        chance += 10;
+      }
+
+      chance += 10 * Math.min(forecastDay.day.metric.wspd / 16, 1);
+
+      if (forecastDay.day.precip_type === 'snow' || forecastDay.day.precip_type === 'freezing rain') {
+        chance += 10;
+      } else {
+        chance -= 10;
+      }
+      if (!chance >= 85) {
+        var inputValue = document.getElementById('integerInput').value; 
+        if (!inputValue === '') { 
+          chance -= inputValue*2
         }
-  
-        chance += 10 * Math.min(forecastDay.day.metric.wspd / 16, 1);
-  
-        if (forecastDay.day.precip_type === 'snow' || forecastDay.day.precip_type === 'freezing rain') {
-          chance += 10;
-        } else {
-          chance -= 10;
-        }
-        if (!chance >= 85) {
-          var inputValue = document.getElementById('integerInput').value; 
-          if (!inputValue === '') { 
-            chance -= inputValue*2
-          }
-        }
-        chance = Math.max(chance, 0)
-        chance = Math.round(chance);
-      // }
-  
-      document.getElementById(`chance-element-${index + 1}`).innerText = `${chance}%`;
+      }
+      chance = Math.max(chance, 0)
+      chance = Math.round(chance);
     }
+
+    document.getElementById(`chance-element-${index + 1}`).innerText = `${chance}%`;
+
     if (chance === 0) {
       chance = 1;
     }
-    // const forecastDay = forecast[index + 1];
+
     document.getElementById(`progress-bar-${index + 1}`).style.setProperty('--meter-value', chance);
     createAndAppendElement('dow', 'th', forecastDay.day.daypart_name);
     createAndAppendElement('snow', 'td', `Snow Forecasted<br><strong>${forecastDay.day.metric.snow_qpf} cm</strong>`);
@@ -219,10 +217,11 @@ async function switchSession() {
   clearElements('perciptattion-chance'); 
   clearElements('perciptattion'); clearElements('wind'); 
   clearElements('temp'); 
-  clearElements('visibility');
+  clearElements('visibility'); 
   clearElements('uv-index');
   const selectedValue = document.getElementById('sessions').value;
   if (selectedValue === '0') {
+    // Use browser's location
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const latitude = position.coords.latitude;
