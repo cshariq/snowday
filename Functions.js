@@ -42,6 +42,8 @@ function fetchWeather(url) {
 }
 
 function processWeatherData(data) {
+  let snowDayChance = 0;
+  let chance = 0;
   console.log("Processing data")
   clearElements('dow'); 
   clearElements('snow');
@@ -66,7 +68,7 @@ function processWeatherData(data) {
       return hours;
     }
     const timeLeft = hoursUntil4AM();
-    let chance = 0;
+    chance = 0;
     const forecastDay = data.fcstdaily10short.forecasts[1];
     if (forecastDay.metric.snow_qpf !== 0) {
       chance += 15 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
@@ -120,7 +122,7 @@ function processWeatherData(data) {
     chance = Math.max(chance, 0)
     return Math.round(chance);
   }
-  let snowDayChance = calculateSnowDayChance(data);
+  snowDayChance = calculateSnowDayChance(data);
   document.getElementById('percentage-text').innerHTML = `<strong>${snowDayChance}%</strong>`;
 
   if (snowDayChance === 0) {
@@ -139,33 +141,35 @@ function processWeatherData(data) {
     }
     
     const forecastDay = forecast[index + 1];
-    let chance = 0;
-
-    if (forecastDay.day.pop >= 50) {
-      chance += 35 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
-      chance += 35 * Math.min(forecastDay.day.pop / 100, 1);
-
-      if (forecastDay.metric.max_temp <= 3) {
-        chance += 10;
-      }
-
-      chance += 10 * Math.min(forecastDay.day.metric.wspd / 16, 1);
-
-      if (forecastDay.day.precip_type === 'snow' || forecastDay.day.precip_type === 'freezing rain') {
-        chance += 10;
-      } else {
-        chance -= 10;
-      }
-      if (!chance >= 85) {
-        var inputValue = document.getElementById('integerInput').value; 
-        if (!inputValue === '') { 
-          chance -= inputValue*2
+    chance = 0;
+    if (index == 0) {
+      chance = snowDayChance;
+    } else {
+      if (forecastDay.day.pop >= 50) {
+        chance += 35 * Math.min(forecastDay.metric.snow_qpf / 7.6, 1);
+        chance += 35 * Math.min(forecastDay.day.pop / 100, 1);
+  
+        if (forecastDay.metric.max_temp <= 3) {
+          chance += 10;
         }
+  
+        chance += 10 * Math.min(forecastDay.day.metric.wspd / 16, 1);
+  
+        if (forecastDay.day.precip_type === 'snow' || forecastDay.day.precip_type === 'freezing rain') {
+          chance += 10;
+        } else {
+          chance -= 10;
+        }
+        if (!chance >= 85) {
+          var inputValue = document.getElementById('integerInput').value; 
+          if (!inputValue === '') { 
+            chance -= inputValue*2
+          }
+        }
+        chance = Math.max(chance, 0)
+        chance = Math.round(chance);
       }
-      chance = Math.max(chance, 0)
-      chance = Math.round(chance);
     }
-
     document.getElementById(`chance-element-${index + 1}`).innerText = `${chance}%`;
 
     if (chance === 0) {
