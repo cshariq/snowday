@@ -126,10 +126,12 @@ function processWeatherData(data) {
   document.getElementById('percentage-text').innerHTML = `<strong>${snowDayChance}%</strong>`;
 
   if (snowDayChance === 0) {
-    snowDayChance = 1;
+    snowDayChanceMod = 1;
+  } else {
+    snowDayChanceMod = snowDayChance;
   }
 
-  document.getElementById('progress-bar').style.setProperty('--meter-value', snowDayChance);
+  document.getElementById('progress-bar').style.setProperty('--meter-value', snowDayChanceMod);
 
   const forecast = data.fcstdaily10short.forecasts;
   const days = ['day1', 'day2', 'day3', 'day4', 'day5'];
